@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+GIT_COMMIT_MSG_FILE=$1
+COMMIT_MSG=`head -n1 $GIT_COMMIT_MSG_FILE`
+PATTERN="^((feat:)|(fix:)|(refactor:)|(chore:)|(Merge))[[:space:]]"
+
+if ! [[ $COMMIT_MSG =~ $PATTERN ]]; then
+  echo "Commit message must start with feat: or fix: or refactor: or chore:"
+  exit 1
+fi
