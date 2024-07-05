@@ -1,0 +1,10 @@
+<div class="overview-info-card flex flex-column justify-content-center align-items-center p-1 gap-4">
+  <div class="date text-2xl">{{ date() }}</div>
+  <div class="weather-info flex-column flex gap-3">
+    <div class="icon icon-{{iconName()}} text-center text-7xl"></div>
+    <div class="temperature-info flex flex-column gap-1">
+      <div class="highest">Highest: {{ highestTemperature() }}℃</div>
+      <div class="lowest">Lowest: {{ lowestTemperature() }}℃</div>
+    </div>
+  </div>
+</div>
