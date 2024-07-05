@@ -39,4 +39,18 @@ export class AppComponent {
     // note: filter last item as it does not have all info
     this.resultList.next(result.filter(i => result.indexOf(i) !== 5));
   }
+
+  getCurrentTime() {
+    let hours = [0, 3, 6, 9, 12, 15, 18, 21];
+    let currentTime = new Date().getHours();
+
+    hours.push(currentTime);
+    hours.sort((a,b) => a < b ? -1 : 1);
+    let displayedTime: number | string = hours[hours.indexOf(currentTime) + 1];
+
+    if(displayedTime < 9) {
+      displayedTime = "0" + displayedTime;
+    }
+    return displayedTime + ":00:00";
+  }
 }

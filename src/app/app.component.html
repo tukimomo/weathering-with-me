@@ -6,8 +6,8 @@
       <app-overview-info-card
           [date] = "record.date"
           [iconName]="'04d'"
-          [highestTemperature]="32"
-          [lowestTemperature]="24"
+          [highestTemperature]="record.data[getCurrentTime()].main.temp_max"
+          [lowestTemperature]="record.data[getCurrentTime()].main.temp_min"
 
         ></app-overview-info-card>
   }
