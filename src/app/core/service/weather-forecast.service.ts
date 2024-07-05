@@ -23,7 +23,7 @@ export class WeatherForecastService {
           q: weatherQueryParams.q,
           lang: this.DEFAULT_LANGUAGE,
           cnt: this.DEFAULT_COUNT,
-          unit: this.DEFAULT_UNIT,
+          units: this.DEFAULT_UNIT,
           appid: API_KEY
         }
       }
