@@ -41,16 +41,19 @@ export class AppComponent {
   }
 
   getCurrentTime() {
-    let hours = [0, 3, 6, 9, 12, 15, 18, 21];
-    let currentTime = new Date().getHours();
+    const hours = [0, 3, 6, 9, 12, 15, 18, 21];
+    const currentSystemDate = new Date();
+    let currentSystemTime = currentSystemDate.getHours() + currentSystemDate.getMinutes() * 0.01;
 
-    hours.push(currentTime);
+    hours.push(currentSystemTime);
     hours.sort((a,b) => a < b ? -1 : 1);
-    let displayedTime: number | string = hours[hours.indexOf(currentTime) + 1];
 
-    if(displayedTime < 9) {
-      displayedTime = "0" + displayedTime;
+    let currentForecastTime: number | string = hours[hours.indexOf(currentSystemTime) + 1];
+
+    if(currentForecastTime < 9) {
+      currentForecastTime = "0" + currentForecastTime;
     }
-    return displayedTime + ":00:00";
+
+    return currentForecastTime + ":00:00";
   }
 }
