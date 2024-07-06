@@ -1,10 +1,10 @@
 import {Component, input} from '@angular/core';
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-overview-info-card',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, NgOptimizedImage],
   templateUrl: './overview-info-card.component.html',
   styleUrl: './overview-info-card.component.scss'
 })
