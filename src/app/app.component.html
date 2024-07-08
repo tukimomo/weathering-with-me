@@ -5,10 +5,10 @@
   @for(record of resultList | async; track $index) {
       <app-overview-info-card
           [date] = "record.date"
-          [iconName]="'04d'"
-          [highestTemperature]="record.data[getCurrentTime()].main.temp_max"
-          [lowestTemperature]="record.data[getCurrentTime()].main.temp_min"
-
+          [iconName]="record.data[getFirstForecastIndex(record.data)].weather[0].icon"
+          [highestTemperature]="getHighestAndLowestTemperature(record.data).averageHighestTemperature"
+          [lowestTemperature]="getHighestAndLowestTemperature(record.data).averageLowestTemperature"
+          [iconAlt]="record.data[getFirstForecastIndex(record.data)].weather[0].description"
         ></app-overview-info-card>
   }
   </div>

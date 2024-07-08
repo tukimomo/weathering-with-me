@@ -4,7 +4,7 @@
     <div>{{ getDayOfWeek() }}</div>
   </div>
   <div class="weather-info flex-column flex gap-3 align-items-center">
-    <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" alt="">
+    <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">
     <div class="temperature-info flex flex-column gap-1">
       <div class="highest">Highest: {{ highestTemperature() }}℃</div>
       <div class="lowest">Lowest: {{ lowestTemperature() }}℃</div>

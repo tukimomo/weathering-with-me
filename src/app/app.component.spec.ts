@@ -19,14 +19,4 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it('should return current forecast time ahead of current time', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    jasmine.clock().install();
-    let baseTime = new Date(2013, 9, 23, 9, 19,43);
-    jasmine.clock().mockDate(baseTime);
-    jasmine.clock().tick(50)
-    expect(app.getCurrentTime()).toEqual("12:00:00");
-  })
 });

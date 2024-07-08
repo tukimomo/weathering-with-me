@@ -27,33 +27,23 @@ export class AppComponent {
       q: locationName,
     }).subscribe(result => {
       this.forecasts.set(this.weatherForecastProcessorService.processData(result.list));
-      this.getForecastList();
+      this.generateDisplayedForecastList();
     });
   }
 
-  getForecastList(){
+  generateDisplayedForecastList(){
     let result: Array<{date: string; data: { [time: string]: RawWeatherForecast }}> = [];
     Object.entries(this.forecasts()).map(([date, value]) => result.push(
       {date: date, data: value}
     ));
-    // note: filter last item as it does not have all info
-    this.resultList.next(result.filter(i => result.indexOf(i) !== 5));
+    this.resultList.next(result);
   }
 
-  getCurrentTime() {
-    const hours = [0, 3, 6, 9, 12, 15, 18, 21];
-    const currentSystemDate = new Date();
-    let currentSystemTime = currentSystemDate.getHours() + currentSystemDate.getMinutes() * 0.01;
+  getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
+    return this.weatherForecastProcessorService.getAverageHighestAndAverageLowestTemperature(forecast)
+  }
 
-    hours.push(currentSystemTime);
-    hours.sort((a,b) => a < b ? -1 : 1);
-
-    let currentForecastTime: number | string = hours[hours.indexOf(currentSystemTime) + 1];
-
-    if(currentForecastTime < 9) {
-      currentForecastTime = "0" + currentForecastTime;
-    }
-
-    return currentForecastTime + ":00:00";
+  getFirstForecastIndex(forecast: { [time: string]: RawWeatherForecast }) {
+    return Object.keys(forecast)[0];
   }
 }
