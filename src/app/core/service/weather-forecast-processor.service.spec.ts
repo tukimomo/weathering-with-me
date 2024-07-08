@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {WeatherForecastProcessorService} from "./weather-forecast-processor.service";
 import {rawWeatherForecastMock, weatherForecastRawDataMock} from "../../../shared/weather-forecast-raw-data-mock";
 
@@ -21,12 +21,12 @@ describe('WeatherForecastProcessorService', () => {
     // assert
     expect(actual).toEqual({
       "2024-07-05": {
-        "15:00:00" : rawWeatherForecastMock
+        "15:00:00": rawWeatherForecastMock
       }
     })
   })
 
-  it('should return the the highest and the lowest temperature among of the forecasts by hour', () => {
+  it('should return the the highest and the lowest temperature that is rounded up among of the forecasts by hour', () => {
     // arrange
     let mockData = {
       "00:00:00": {
@@ -68,8 +68,8 @@ describe('WeatherForecastProcessorService', () => {
         main: {
           temp: 32,
           feels_like: 32,
-          temp_min: 20,
-          temp_max: 40,
+          temp_min: 20.45,
+          temp_max: 40.99,
           pressure: 24, // unit default: hPa
           sea_level: 24, // unit default: hPa
           grnd_level: 5, // unit default: hPa
@@ -134,7 +134,7 @@ describe('WeatherForecastProcessorService', () => {
     }
 
     // assert
-    expect(service.getHighestAndLowestTemperature(mockData).lowest).toEqual(20)
-    expect(service.getHighestAndLowestTemperature(mockData).highest).toEqual(40)
+    expect(service.getHighestAndLowestTemperature(mockData).lowest).toEqual(21)
+    expect(service.getHighestAndLowestTemperature(mockData).highest).toEqual(41)
   })
 });

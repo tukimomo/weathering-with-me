@@ -12,10 +12,10 @@ export class WeatherForecastProcessorService {
    @return map: WeatherForecast
    @example
    weatherForecastMap = {
-     "2024-06-27": {
-       "15:00:00": {},
-       "18:00:00": {},
-       }
+   "2024-06-27": {
+   "15:00:00": {},
+   "18:00:00": {},
+   }
    }
    * @param forecasts
    **/
@@ -43,10 +43,10 @@ export class WeatherForecastProcessorService {
 
   getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
     return {
-      highest: Object.values(forecast)
-        .sort((a, b) => b.main.temp_max - a.main.temp_max)[0].main.temp_max,
-      lowest: Object.values(forecast)
-        .sort((a, b) => a.main.temp_min - b.main.temp_min)[0].main.temp_min,
+      highest: Math.ceil(Object.values(forecast)
+        .sort((a, b) => b.main.temp_max - a.main.temp_max)[0].main.temp_max),
+      lowest: Math.ceil(Object.values(forecast)
+        .sort((a, b) => a.main.temp_min - b.main.temp_min)[0].main.temp_min),
     }
   }
 }
