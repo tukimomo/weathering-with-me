@@ -20,7 +20,7 @@ describe('OverviewInfoCardComponent', () => {
     fixture = TestBed.createComponent(OverviewInfoCardComponent);
     component = fixture.componentInstance;
 
-    // Set all required fields
+    // Set all required fields so that the test can be run
     fixture.componentRef.setInput('date', '2024-07-07')
     fixture.componentRef.setInput('iconName', '01d')
     fixture.componentRef.setInput('highestTemperature', '32')
@@ -30,8 +30,15 @@ describe('OverviewInfoCardComponent', () => {
   });
 
   it('should create', () => {
-
-
     expect(component).toBeTruthy();
   });
+
+  it('should return day of the week in format of 3 characters', () => {
+    // arrange
+    // set current input date to Saturday
+    fixture.componentRef.setInput('date', '2024-07-06');
+
+    // assert
+    expect(component.generateDisplayedDayOfWeek()).toEqual('Sat');
+  })
 });

@@ -1,7 +1,7 @@
 <div class="overview-info-card flex flex-column justify-content-center align-items-center p-1 gap-2">
   <div class="flex flex-column align-items-center">
     <div class="text-2xl">{{ date() | date:"MMM, dd" }}</div>
-    <div>{{ getDayOfWeek() }}</div>
+    <div>{{ generateDisplayedDayOfWeek() }}</div>
   </div>
   <div class="weather-info flex-column flex gap-3 align-items-center">
     <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">

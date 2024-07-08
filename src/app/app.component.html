@@ -6,8 +6,8 @@
       <app-overview-info-card
           [date] = "record.date"
           [iconName]="record.data[getFirstForecastIndex(record.data)].weather[0].icon"
-          [highestTemperature]="getHighestAndLowestTemperature(record.data).averageHighestTemperature"
-          [lowestTemperature]="getHighestAndLowestTemperature(record.data).averageLowestTemperature"
+          [highestTemperature]="getHighestAndLowestTemperature(record.data).highest"
+          [lowestTemperature]="getHighestAndLowestTemperature(record.data).lowest"
           [iconAlt]="record.data[getFirstForecastIndex(record.data)].weather[0].description"
         ></app-overview-info-card>
   }

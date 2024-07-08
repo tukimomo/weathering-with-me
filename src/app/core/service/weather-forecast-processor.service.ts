@@ -41,11 +41,11 @@ export class WeatherForecastProcessorService {
     return {};
   }
 
-  getAverageHighestAndAverageLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
+  getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
     return {
-      averageHighestTemperature: Object.values(forecast)
+      highest: Object.values(forecast)
         .sort((a, b) => b.main.temp_max - a.main.temp_max)[0].main.temp_max,
-      averageLowestTemperature: Object.values(forecast)
+      lowest: Object.values(forecast)
         .sort((a, b) => a.main.temp_min - b.main.temp_min)[0].main.temp_min,
     }
   }

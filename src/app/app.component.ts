@@ -40,7 +40,7 @@ export class AppComponent {
   }
 
   getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
-    return this.weatherForecastProcessorService.getAverageHighestAndAverageLowestTemperature(forecast)
+    return this.weatherForecastProcessorService.getHighestAndLowestTemperature(forecast)
   }
 
   getFirstForecastIndex(forecast: { [time: string]: RawWeatherForecast }) {

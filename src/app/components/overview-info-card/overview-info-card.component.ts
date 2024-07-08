@@ -15,7 +15,8 @@ export class OverviewInfoCardComponent {
   highestTemperature = input.required<number>();
   lowestTemperature = input.required<number>();
   iconAlt = input<string>("");
-  getDayOfWeek() {
+
+  generateDisplayedDayOfWeek() {
     return this.days[new Date(Date.parse(this.date())).getDay()]
   }
 }
