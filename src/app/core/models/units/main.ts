@@ -7,5 +7,5 @@ export interface Main {
   sea_level: number;
   grnd_level: number;
   humidity: number;
-  temp_kf: number;
+  temp_kf?: number;
 }

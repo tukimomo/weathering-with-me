@@ -4,6 +4,7 @@ import { API_KEY, BASE_URL } from '../constants/constants';
 import { Observable } from 'rxjs';
 import { WeatherForecastData } from '../models/weather-forecast-data';
 import { WeatherQueryParams } from '../models/weather-query-params';
+import {CurrentWeatherData} from "../models/current-weather-data";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class WeatherForecastService {
     );
   }
 
-  getCurrentWeatherForecast(weatherQueryParams: WeatherQueryParams): Observable<WeatherForecastData> {
-    return this.httpClient.get<WeatherForecastData>(`${this.currentWeatherDataUrl}`, {
+  getCurrentWeatherForecast(weatherQueryParams: WeatherQueryParams): Observable<CurrentWeatherData> {
+    return this.httpClient.get<CurrentWeatherData>(`${this.currentWeatherDataUrl}`, {
       params: {
         q: weatherQueryParams.q,
         lang: this.DEFAULT_LANGUAGE,
