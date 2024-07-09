@@ -13,6 +13,7 @@ export class WeatherForecastService {
   DEFAULT_UNIT = "metric";
   DEFAULT_LANGUAGE = "en";
   weatherDataUrl = `${BASE_URL}/data/2.5/forecast`;
+  currentWeatherDataUrl: string = `${BASE_URL}/data/2.5/weather`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -28,5 +29,16 @@ export class WeatherForecastService {
         }
       }
     );
+  }
+
+  getCurrentWeatherForecast(weatherQueryParams: WeatherQueryParams): Observable<RawWeatherData> {
+    return this.httpClient.get<RawWeatherData>(`${this.currentWeatherDataUrl}`, {
+      params: {
+        q: weatherQueryParams.q,
+        lang: this.DEFAULT_LANGUAGE,
+        units: this.DEFAULT_UNIT,
+        appid: API_KEY
+      }
+    })
   }
 }

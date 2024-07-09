@@ -1,10 +1,11 @@
 import {Component, output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
 
 @Component({
   selector: 'app-search-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputTextModule],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.scss'
 })
