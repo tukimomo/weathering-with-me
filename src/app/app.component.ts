@@ -7,9 +7,10 @@ import {NormalizedWeatherForecast} from "./core/models/normalized-weather-foreca
 import {WeatherForecastProcessorService} from "./core/service/weather-forecast-processor.service";
 import {TimeBasedWeatherForecast} from "./core/models/time-based-weather-forecast";
 import {AsyncPipe, DatePipe} from "@angular/common";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, zip} from "rxjs";
 import {DateUtils} from "../shared/date-utils";
-import {City} from "./core/models/units/city";
+import {CurrentWeatherData} from "./core/models/current-weather-data";
+import {WeatherForecastData} from "./core/models/weather-forecast-data";
 
 @Component({
   selector: 'app-root',
@@ -23,16 +24,21 @@ export class AppComponent {
   weatherForecastProcessorService = inject(WeatherForecastProcessorService);
   dateUtils: DateUtils = inject(DateUtils);
 
-  overviewCityInfo = signal<City | undefined>(undefined);
+  overviewCityInfo = signal<{ sunrise: number; sunset: number } | undefined>(undefined);
   forecasts = signal<NormalizedWeatherForecast>({});
   resultList = new BehaviorSubject<Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }>>([]);
 
   handleSearch(locationName: string) {
-    this.weatherForecastService.getWeatherForecastForFiveDays({
-      q: locationName,
-    }).subscribe(result => {
-      this.overviewCityInfo.set(result.city);
-      this.forecasts.set(this.weatherForecastProcessorService.processData(result.list));
+    zip(
+      this.weatherForecastService.getCurrentWeatherForecast({
+        q: locationName,
+      }),
+      this.weatherForecastService.getWeatherForecastForFiveDays({
+        q: locationName,
+      })
+    ).subscribe(value => {
+      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
+      this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
       this.generateDisplayedForecastList();
     });
   }
