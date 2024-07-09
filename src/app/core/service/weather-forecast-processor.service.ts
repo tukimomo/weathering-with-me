@@ -1,5 +1,5 @@
-import {RawWeatherForecast} from "../models/raw-weather-forecast";
-import {WeatherForecast} from "../models/weather-forecast";
+import {TimeBasedWeatherForecast} from "../models/time-based-weather-forecast";
+import {NormalizedWeatherForecast} from "../models/normalized-weather-forecast";
 import {Injectable} from "@angular/core";
 
 @Injectable({
@@ -9,7 +9,7 @@ export class WeatherForecastProcessorService {
 
   /**
    @description This method will group the weather forecast data by date and time
-   @return map: WeatherForecast
+   @return map: NormalizedWeatherForecast
    @example
    weatherForecastMap = {
    "2024-06-27": {
@@ -19,8 +19,8 @@ export class WeatherForecastProcessorService {
    }
    * @param forecasts
    **/
-  processData(forecasts: RawWeatherForecast[]): WeatherForecast {
-    let weatherForecastMap: WeatherForecast = {};
+  processData(forecasts: TimeBasedWeatherForecast[]): NormalizedWeatherForecast {
+    let weatherForecastMap: NormalizedWeatherForecast = {};
     if (!!forecasts) {
       forecasts.forEach(item => {
         let dateTimeArray: Array<string> = item.dt_txt.split(" "); // 2024-06-27 03:00:00
@@ -41,7 +41,7 @@ export class WeatherForecastProcessorService {
     return {};
   }
 
-  getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
+  getHighestAndLowestTemperature(forecast: { [time: string]: TimeBasedWeatherForecast }) {
     return {
       highest: Math.ceil(Object.values(forecast)
         .sort((a, b) => b.main.temp_max - a.main.temp_max)[0].main.temp_max),

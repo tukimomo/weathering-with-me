@@ -3,14 +3,13 @@ import {RouterOutlet} from '@angular/router';
 import {OverviewInfoCardComponent} from "./components/overview-info-card/overview-info-card.component";
 import {SearchFormComponent} from "./components/search-form/search-form.component";
 import {WeatherForecastService} from "./core/service/weather-forecast.service";
-import {WeatherForecast} from "./core/models/weather-forecast";
+import {NormalizedWeatherForecast} from "./core/models/normalized-weather-forecast";
 import {WeatherForecastProcessorService} from "./core/service/weather-forecast-processor.service";
-import {RawWeatherForecast} from "./core/models/raw-weather-forecast";
+import {TimeBasedWeatherForecast} from "./core/models/time-based-weather-forecast";
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
-import {RawWeatherData} from "./core/models/raw-weather-data";
-import {RawCityInfo} from "./core/models/raw-city-info";
 import {DateUtils} from "../shared/date-utils";
+import {City} from "./core/models/units/city";
 
 @Component({
   selector: 'app-root',
@@ -24,9 +23,9 @@ export class AppComponent {
   weatherForecastProcessorService = inject(WeatherForecastProcessorService);
   dateUtils: DateUtils = inject(DateUtils);
 
-  overviewCityInfo = signal<RawCityInfo | undefined>(undefined);
-  forecasts = signal<WeatherForecast>({});
-  resultList = new BehaviorSubject<Array<{date: string; data: { [time: string]: RawWeatherForecast }}>>([]);
+  overviewCityInfo = signal<City | undefined>(undefined);
+  forecasts = signal<NormalizedWeatherForecast>({});
+  resultList = new BehaviorSubject<Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }>>([]);
 
   handleSearch(locationName: string) {
     this.weatherForecastService.getWeatherForecastForFiveDays({
@@ -38,26 +37,26 @@ export class AppComponent {
     });
   }
 
-  generateDisplayedForecastList(){
-    let result: Array<{date: string; data: { [time: string]: RawWeatherForecast }}> = [];
+  generateDisplayedForecastList() {
+    let result: Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }> = [];
     Object.entries(this.forecasts()).map(([date, value]) => result.push(
       {date: date, data: value}
     ));
     this.resultList.next(result);
   }
 
-  getHighestAndLowestTemperature(forecast: { [time: string]: RawWeatherForecast }) {
+  getHighestAndLowestTemperature(forecast: { [time: string]: TimeBasedWeatherForecast }) {
     return this.weatherForecastProcessorService.getHighestAndLowestTemperature(forecast)
   }
 
-  getFirstForecastIndex(forecast: { [time: string]: RawWeatherForecast }) {
+  getFirstForecastIndex(forecast: { [time: string]: TimeBasedWeatherForecast }) {
     return Object.keys(forecast)[0];
   }
 
   getSunriseAndSunsetTime() {
-      return {
-        sunriseAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunrise),
-        sunsetAt:  this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunset)
-      }
+    return {
+      sunriseAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunrise),
+      sunsetAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunset)
+    }
   }
 }

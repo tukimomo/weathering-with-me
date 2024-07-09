@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_KEY, BASE_URL } from '../constants/constants';
 import { Observable } from 'rxjs';
-import { RawWeatherData } from '../models/raw-weather-data';
+import { WeatherForecastData } from '../models/weather-forecast-data';
 import { WeatherQueryParams } from '../models/weather-query-params';
 
 @Injectable({
@@ -17,8 +17,8 @@ export class WeatherForecastService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getWeatherForecastForFiveDays(weatherQueryParams: WeatherQueryParams): Observable<RawWeatherData> {
-    return this.httpClient.get<RawWeatherData>(`${this.weatherDataUrl}`,
+  getWeatherForecastForFiveDays(weatherQueryParams: WeatherQueryParams): Observable<WeatherForecastData> {
+    return this.httpClient.get<WeatherForecastData>(`${this.weatherDataUrl}`,
       {
         params: {
           q: weatherQueryParams.q,
@@ -31,8 +31,8 @@ export class WeatherForecastService {
     );
   }
 
-  getCurrentWeatherForecast(weatherQueryParams: WeatherQueryParams): Observable<RawWeatherData> {
-    return this.httpClient.get<RawWeatherData>(`${this.currentWeatherDataUrl}`, {
+  getCurrentWeatherForecast(weatherQueryParams: WeatherQueryParams): Observable<WeatherForecastData> {
+    return this.httpClient.get<WeatherForecastData>(`${this.currentWeatherDataUrl}`, {
       params: {
         q: weatherQueryParams.q,
         lang: this.DEFAULT_LANGUAGE,
