@@ -3,14 +3,14 @@
   @if((resultList | async)?.length !== 0) {
     <div class="flex flex-row gap-4">
       @for(record of resultList | async; track $index) {
-        <app-overview-info-card
+        <app-simple-forecast-card
           [date] = "record.date"
           [iconName]="record.data[getFirstForecastIndex(record.data)].weather[0].icon"
           [highestTemperature]="getHighestAndLowestTemperature(record.data).highest"
           [lowestTemperature]="getHighestAndLowestTemperature(record.data).lowest"
           [iconAlt]="record.data[getFirstForecastIndex(record.data)].weather[0].description"
         >
-        </app-overview-info-card>
+        </app-simple-forecast-card>
       }
     </div>
     <div class="flex flex-column gap-3">

@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OverviewInfoCardComponent } from './overview-info-card.component';
+import { SimpleForecastCardComponent } from './simple-forecast-card.component';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HttpClient} from "@angular/common/http";
 
 describe('OverviewInfoCardComponent', () => {
-  let component: OverviewInfoCardComponent;
-  let fixture: ComponentFixture<OverviewInfoCardComponent>;
+  let component: SimpleForecastCardComponent;
+  let fixture: ComponentFixture<SimpleForecastCardComponent>;
   let httpClient: HttpClient;
   let httpClientTestingController: HttpTestingController;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OverviewInfoCardComponent, HttpClientTestingModule]
+      imports: [SimpleForecastCardComponent, HttpClientTestingModule]
     })
     .compileComponents();
 
     httpClient = TestBed.inject(HttpClient);
     httpClientTestingController = TestBed.inject(HttpTestingController);
-    fixture = TestBed.createComponent(OverviewInfoCardComponent);
+    fixture = TestBed.createComponent(SimpleForecastCardComponent);
     component = fixture.componentInstance;
 
     // Set all required fields so that the test can be run

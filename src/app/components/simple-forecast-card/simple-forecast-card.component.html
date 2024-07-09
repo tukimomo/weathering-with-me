@@ -1,9 +1,9 @@
-<div class="overview-info-card">
-  <div class="date-info flex flex-column align-items-center">
+<div class="simple-forecast-container">
+  <div class="date-info-container flex flex-column align-items-center">
     <div class="date-month text-xl">{{ date() | date:"MMM, dd" }}</div>
     <div class="week-day">{{ generateDisplayedDayOfWeek() }}</div>
   </div>
-  <div class="weather-info flex-column w-full flex gap-3 align-items-center">
+  <div class="weather-info-container flex-column w-full flex gap-3 align-items-center">
     <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">
     <div class="temperature-info w-full flex flex-column gap-1">
       <div class="flex flex-row justify-content-between">

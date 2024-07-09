@@ -1,6 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {OverviewInfoCardComponent} from "./components/overview-info-card/overview-info-card.component";
 import {SearchFormComponent} from "./components/search-form/search-form.component";
 import {WeatherForecastService} from "./core/service/weather-forecast.service";
 import {NormalizedWeatherForecast} from "./core/models/normalized-weather-forecast";
@@ -11,11 +10,12 @@ import {BehaviorSubject, zip} from "rxjs";
 import {DateUtils} from "../shared/date-utils";
 import {CurrentWeatherData} from "./core/models/current-weather-data";
 import {WeatherForecastData} from "./core/models/weather-forecast-data";
+import {SimpleForecastCardComponent} from "./components/simple-forecast-card/simple-forecast-card.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, OverviewInfoCardComponent, SearchFormComponent, DatePipe, AsyncPipe],
+  imports: [RouterOutlet, SimpleForecastCardComponent, SearchFormComponent, DatePipe, AsyncPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
