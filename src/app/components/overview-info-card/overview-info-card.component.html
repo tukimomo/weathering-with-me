@@ -1,13 +1,19 @@
 <div class="overview-info-card">
-  <div class="flex flex-column align-items-center">
-    <div class="text-2xl">{{ date() | date:"MMM, dd" }}</div>
-    <div>{{ generateDisplayedDayOfWeek() }}</div>
+  <div class="date-info flex flex-column align-items-center">
+    <div class="date-month text-xl">{{ date() | date:"MMM, dd" }}</div>
+    <div class="week-day">{{ generateDisplayedDayOfWeek() }}</div>
   </div>
-  <div class="weather-info flex-column flex gap-3 align-items-center">
+  <div class="weather-info flex-column w-full flex gap-3 align-items-center">
     <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">
-    <div class="temperature-info flex flex-column gap-1">
-      <div class="highest">Highest: {{ highestTemperature() }}℃</div>
-      <div class="lowest">Lowest: {{ lowestTemperature() }}℃</div>
+    <div class="temperature-info w-full flex flex-column gap-1">
+      <div class="flex flex-row justify-content-between">
+        <div class="label">Highest:</div>
+        <div class="value">{{ highestTemperature() }}℃</div>
+      </div>
+      <div class="flex flex-row justify-content-between">
+        <div class="label">Lowest:</div>
+        <div class="value">{{ lowestTemperature() }}℃</div>
+      </div>
     </div>
   </div>
 </div>

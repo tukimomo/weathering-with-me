@@ -1,7 +1,39 @@
 @import "../../../placeholders";
-
+@import "../../../mixins";
 .overview-info-card {
   @extend %container-vertical;
   width: 180px;
   height: 280px;
+}
+
+@include responsive-mobile() {
+  .overview-info-card {
+    width: fit-content;
+    height: fit-content;
+    padding: 12px;
+    gap: 4px;
+    border-radius: 8px;
+    .date-info {
+      .date-month {
+        display: none
+      }
+      .week-day {
+        font-size: 12px;
+      }
+    }
+    .weather-info {
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .temperature-info {
+      .label {
+        display: none
+      }
+      .value {
+        font-size: 12px
+      }
+    }
+  }
 }
