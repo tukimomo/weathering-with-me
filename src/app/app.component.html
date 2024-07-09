@@ -9,8 +9,25 @@
           [highestTemperature]="getHighestAndLowestTemperature(record.data).highest"
           [lowestTemperature]="getHighestAndLowestTemperature(record.data).lowest"
           [iconAlt]="record.data[getFirstForecastIndex(record.data)].weather[0].description"
-        ></app-overview-info-card>
+        >
+        </app-overview-info-card>
       }
+    </div>
+    <div class="flex flex-column gap-3">
+      <div class="sun-info-card">
+        <span class="text-7xl icon-sunrise"></span>
+        <div class="flex flex-column">
+          <div>Sunrise</div>
+          <div class="text-3xl">{{getSunriseAndSunsetTime().sunriseAt}}</div>
+        </div>
+      </div>
+      <div class="sun-info-card">
+        <span class="text-7xl icon-sunset"></span>
+        <div class="flex flex-column">
+          <div>Sunset</div>
+          <div class="text-3xl">{{getSunriseAndSunsetTime().sunsetAt}}</div>
+        </div>
+      </div>
     </div>
   }
 </div>

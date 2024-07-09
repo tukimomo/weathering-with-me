@@ -4,3 +4,23 @@
   box-shadow:  35px 35px 100px #eeeeee,
   -35px -35px 100px #ffffff;
 }
+
+%container-vertical {
+  @extend %neumorphism;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+%container-horizontal {
+  @extend %neumorphism;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+}

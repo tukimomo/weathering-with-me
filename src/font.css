@@ -17,3 +17,15 @@
     font-family: 'poppins-bold';
     src: url("./assets/fonts/Poppins/Poppins-Bold.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: 'weather-specs';
+  src:  url('assets/fonts/Weather/weather-specs.eot?biwysj');
+  src:  url('assets/fonts/Weather/weather-specs.eot?biwysj#iefix') format('embedded-opentype'),
+  url('assets/fonts/Weather/weather-specs.ttf?biwysj') format('truetype'),
+  url('assets/fonts/Weather/weather-specs.woff?biwysj') format('woff'),
+  url('assets/fonts/Weather/weather-specs.svg?biwysj#weather-specs') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

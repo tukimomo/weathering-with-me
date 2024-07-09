@@ -8,6 +8,9 @@ import {WeatherForecastProcessorService} from "./core/service/weather-forecast-p
 import {RawWeatherForecast} from "./core/models/raw-weather-forecast";
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {BehaviorSubject} from "rxjs";
+import {RawWeatherData} from "./core/models/raw-weather-data";
+import {RawCityInfo} from "./core/models/raw-city-info";
+import {DateUtils} from "../shared/date-utils";
 
 @Component({
   selector: 'app-root',
@@ -19,6 +22,9 @@ import {BehaviorSubject} from "rxjs";
 export class AppComponent {
   weatherForecastService = inject(WeatherForecastService);
   weatherForecastProcessorService = inject(WeatherForecastProcessorService);
+  dateUtils: DateUtils = inject(DateUtils);
+
+  overviewCityInfo = signal<RawCityInfo | undefined>(undefined);
   forecasts = signal<WeatherForecast>({});
   resultList = new BehaviorSubject<Array<{date: string; data: { [time: string]: RawWeatherForecast }}>>([]);
 
@@ -26,6 +32,7 @@ export class AppComponent {
     this.weatherForecastService.getWeatherForecastForFiveDays({
       q: locationName,
     }).subscribe(result => {
+      this.overviewCityInfo.set(result.city);
       this.forecasts.set(this.weatherForecastProcessorService.processData(result.list));
       this.generateDisplayedForecastList();
     });
@@ -45,5 +52,12 @@ export class AppComponent {
 
   getFirstForecastIndex(forecast: { [time: string]: RawWeatherForecast }) {
     return Object.keys(forecast)[0];
+  }
+
+  getSunriseAndSunsetTime() {
+      return {
+        sunriseAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunrise),
+        sunsetAt:  this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunset)
+      }
   }
 }
