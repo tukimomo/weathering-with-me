@@ -5,7 +5,7 @@
   </div>
   <div class="simple-forecast-container__weather flex-column w-full flex gap-3 align-items-center">
     <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">
-    <div class="simple-forecast-container__weather-info__temperature w-full flex flex-column gap-1">
+    <div class="simple-forecast-container__weather__temperature w-full flex flex-column gap-1">
       <div class="flex flex-row justify-content-between">
         <div class="label">Highest:</div>
         <div class="value">{{ highestTemperature() }}℃</div>

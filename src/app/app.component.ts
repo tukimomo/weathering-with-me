@@ -60,6 +60,10 @@ export class AppComponent implements OnInit {
     return Object.keys(forecast)[0];
   }
 
+  getWholeTemperature(value: number) {
+    return Math.ceil(value);
+  }
+
   ngOnInit() {
     if(!!navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(result => {

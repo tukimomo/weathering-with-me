@@ -2,6 +2,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "colors";
+@import "mixins";
 @import url('font.css');
 
 * {
@@ -20,4 +21,16 @@ html, body {
   margin-right: unset;
   padding-left: 72px;
   padding-right: 72px;
+}
+
+@include responsive-mobile() {
+  html, body {
+    padding: 4px;
+  }
+}
+
+@include responsive-tablet() {
+  html, body {
+    padding: 16px;
+  }
 }

@@ -1,19 +1,19 @@
-<div class="weather-content w-full h-full grid">
+<div class="weather-content w-full h-full flex flex-column">
   <div class="weather-content__general align-items-start col-12 lg:col-4">
     <app-search-form (search)="handleSearch($event)"></app-search-form>
     @if(current() !== undefined) {
       <div class="flex flex-row w-full justify-content-between">
         <div class="weather-content__general__main">
-          <div class="temperature">{{current()!.main!.temp}}℃</div>
+          <div class="temperature">{{getWholeTemperature(current()!.main!.temp)}}℃</div>
           <div class="description">{{current()!.weather[0]!.description}}℃</div>
           <div class="extra">
             <div class="extra__detail text-800">
               <div>Wind speed</div>
-              <div>{{current()!.wind.speed}}</div>
+              <div>{{current()!.wind.speed}} m/s</div>
             </div>
             <div class="extra__detail text-800">
               <div>Visibility</div>
-              <div>{{current()!.visibility}}</div>
+              <div>{{current()!.visibility}} m</div>
             </div>
           </div>
         </div>
