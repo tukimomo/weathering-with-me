@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   dateUtils: DateUtils = inject(DateUtils);
 
   overviewCityInfo = signal<{ sunrise: number; sunset: number } | undefined>(undefined);
+  current = signal<CurrentWeatherData | undefined>(undefined);
   forecasts = signal<NormalizedWeatherForecast>({});
   resultList = new BehaviorSubject<Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }>>([]);
 
@@ -41,7 +42,8 @@ export class AppComponent implements OnInit {
         q: value,
       })
     ).subscribe(value => {
-      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
+      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys);
+      this.current.set(value[0] as CurrentWeatherData);
       this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
       this.generateDisplayedForecastList();
     });
@@ -90,6 +92,7 @@ export class AppComponent implements OnInit {
       )
     ).subscribe(value => {
       this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
+      this.current.set(value[0] as CurrentWeatherData);
       this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
       this.generateDisplayedForecastList();
     });

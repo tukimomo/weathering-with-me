@@ -1,5 +1,74 @@
 @import "../placeholders";
+@import "../mixins";
 
 .sun-info-card {
   @extend %container-horizontal
+}
+
+.weather-forecast-list {
+  gap: 24px;
+}
+
+.general-info-card  {
+  @extend %container-vertical;
+  min-width: 300px;
+  .current-weather-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    .main-temperature {
+      font-size: 48px;
+    }
+  
+    .main-description {
+      font-size: 24px;
+    }
+  
+    .extra-info {
+      &-detail {
+          font-size: 12px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+    }
+  }
+  
+}
+
+
+@include responsive_mobile() {
+  .general-info-card  {
+    @extend %container-vertical;
+    min-width: 280px;
+    .current-weather-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 160px;
+      .main-temperature {
+        font-size: 32px;
+      }
+    
+      .main-description {
+        font-size: 16px;
+      }
+    
+      .extra-info {
+        &-detail {
+            font-size: 12px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+      }
+    }
+    img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  .weather-forecast-list {
+    gap: 8px;
+  }
 }
