@@ -42,4 +42,31 @@ export class WeatherForecastService {
       }
     })
   }
+
+  getWeatherForecastForFiveDaysByCoords(lat: number, lon: number): Observable<WeatherForecastData> {
+    return this.httpClient.get<WeatherForecastData>(`${this.weatherDataUrl}`,
+      {
+        params: {
+          lat: lat,
+          lon: lon,
+          lang: this.DEFAULT_LANGUAGE,
+          cnt: this.DEFAULT_COUNT,
+          units: this.DEFAULT_UNIT,
+          appid: API_KEY
+        }
+      }
+    );
+  }
+
+  getCurrentWeatherForecastByCoords(lat: number, lon: number): Observable<CurrentWeatherData> {
+    return this.httpClient.get<CurrentWeatherData>(`${this.currentWeatherDataUrl}`, {
+      params: {
+        lat: lat,
+        lon: lon,
+        lang: this.DEFAULT_LANGUAGE,
+        units: this.DEFAULT_UNIT,
+        appid: API_KEY
+      }
+    })
+  }
 }

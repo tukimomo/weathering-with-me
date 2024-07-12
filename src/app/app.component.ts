@@ -1,4 +1,4 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject, signal, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {SearchFormComponent} from "./components/search-form/search-form.component";
 import {WeatherForecastService} from "./core/service/weather-forecast.service";
@@ -19,7 +19,7 @@ import {SimpleForecastCardComponent} from "./components/simple-forecast-card/sim
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   weatherForecastService = inject(WeatherForecastService);
   weatherForecastProcessorService = inject(WeatherForecastProcessorService);
   dateUtils: DateUtils = inject(DateUtils);
@@ -29,12 +29,16 @@ export class AppComponent {
   resultList = new BehaviorSubject<Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }>>([]);
 
   handleSearch(locationName: string) {
+    this._fetchWeatherBySearchValue(locationName);  
+  }
+
+  _fetchWeatherBySearchValue(value: string) {
     zip(
       this.weatherForecastService.getCurrentWeatherForecast({
-        q: locationName,
+        q: value,
       }),
       this.weatherForecastService.getWeatherForecastForFiveDays({
-        q: locationName,
+        q: value,
       })
     ).subscribe(value => {
       this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
@@ -64,5 +68,30 @@ export class AppComponent {
       sunriseAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunrise),
       sunsetAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunset)
     }
+  }
+
+  ngOnInit() {
+    if(!!navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(result => {
+        this._fetchWeatherByCoords(result.coords.latitude, result.coords.longitude);
+      })
+    }
+  }
+
+  _fetchWeatherByCoords(lat: number, lon: number) {
+    zip(
+      this.weatherForecastService.getCurrentWeatherForecastByCoords(
+        lat,
+        lon
+      ),
+      this.weatherForecastService.getWeatherForecastForFiveDaysByCoords(
+        lat,
+        lon
+      )
+    ).subscribe(value => {
+      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
+      this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
+      this.generateDisplayedForecastList();
+    });
   }
 }
