@@ -2,7 +2,6 @@
 @import "../mixins";
 
 .weather-content {
-  gap: 24px;
   &__general  {
     @extend %container-vertical;
     padding: 32px;

@@ -2,13 +2,13 @@
 @import './colors';
 
 @mixin responsive-mobile {
-  @media(max-width: $sm) {
+  @media(max-width: $md) {
     @content
   }
 };
 
 @mixin responsive-tablet {
-  @media(max-width: $md) or (max-width: $lg) {
+  @media(min-width: $md) and (max-width: $lg) {
     @content
   }
 };

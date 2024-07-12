@@ -3,36 +3,81 @@
 .simple-forecast-container {
   @extend %container-vertical;
   width: 180px;
-  height: 280px;
+  max-height: 280px;
+  height: fit-content;
 }
 
 @include responsive-mobile() {
   .simple-forecast-container {
     width: fit-content;
     height: fit-content;
-    padding: 12px;
+    padding: 8px;
     gap: 4px;
     border-radius: 8px;
-    .date-info-container {
-      .date-month {
-        display: none
-      }
-      .week-day {
-        font-size: 12px;
+    &__date-info {
+      &__detail {
+        &__date {
+          display: none;
+        }
+        &__weekday {
+          font-size: 12px;
+        }
       }
     }
-    .weather-info-container {
+    &__weather-info {
+      align-items: center;
+
       img {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
+      }
+
+      &__temperature {
+        align-items: center;
+
+        .label {
+          display: none
+        }
+
+        .value {
+          font-size: 12px
+        }
       }
     }
-    .temperature-info {
-      .label {
-        display: none
+  }
+}
+
+@include responsive-tablet() {
+  .simple-forecast-container {
+    width: max-content;
+    max-height: 280px;
+    padding: 16px;
+    gap: 4px;
+    border-radius: 8px;
+    .simple-forecast-container__date-info {
+      &__detail {
+        &__date {
+          font-size: 12px
+        }
+        &__weekday {
+          font-size: 12px;
+        }
       }
-      .value {
-        font-size: 12px
+    }
+    &__weather-info {
+      align-items: center;
+      img {
+        width: 56px;
+        height: 56px;
+      }
+      &__temperature {
+        align-items: center;
+        .label {
+          display: none
+        }
+        .value {
+          font-size: 16px
+        }
       }
     }
   }
