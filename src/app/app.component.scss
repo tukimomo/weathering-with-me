@@ -1,74 +1,76 @@
 @import "../placeholders";
 @import "../mixins";
 
-.sun-info-card {
-  @extend %container-horizontal
-}
-
-.weather-forecast-list {
+.weather-content {
   gap: 24px;
-}
+  &__general  {
+    @extend %container-vertical;
+    padding: 32px;
+    min-width: 300px;
+    height: fit-content;
+    &__main {
+      display: flex;
+      flex-direction: column;
+      min-width: 150px;
+      .temperature {
+        font-size: 48px;
+      }
 
-.general-info-card  {
-  @extend %container-vertical;
-  min-width: 300px;
-  .current-weather-info {
-    display: flex;
-    flex-direction: column;
-    min-width: 150px;
-    .main-temperature {
-      font-size: 48px;
-    }
-  
-    .main-description {
-      font-size: 24px;
-    }
-  
-    .extra-info {
-      &-detail {
+      .description {
+        font-size: 24px;
+      }
+
+      .extra {
+        &__detail {
           font-size: 12px;
           display: flex;
           flex-direction: row;
           justify-content: space-between;
         }
+      }
     }
+
   }
-  
+
+  &__forecast-list {
+    gap: 24px;
+  }
 }
 
-
 @include responsive_mobile() {
-  .general-info-card  {
-    @extend %container-vertical;
-    min-width: 280px;
-    .current-weather-info {
-      display: flex;
-      flex-direction: column;
-      min-width: 160px;
-      .main-temperature {
-        font-size: 32px;
+  .weather-content {
+    &__general  {
+      @extend %container-vertical;
+      min-width: 280px;
+      &__main {
+        display: flex;
+        flex-direction: column;
+        min-width: 160px;
+        .temperature {
+          font-size: 32px;
+        }
+
+        .description {
+          font-size: 16px;
+        }
+
+        .extra {
+          &-detail {
+              font-size: 12px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+        }
       }
-    
-      .main-description {
-        font-size: 16px;
-      }
-    
-      .extra-info {
-        &-detail {
-            font-size: 12px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-          }
+      img {
+        width: 80px;
+        height: 80px;
       }
     }
-    img {
-      width: 80px;
-      height: 80px;
+
+    &__forecast-list {
+      gap: 8px;
     }
-  }
-  
-  .weather-forecast-list {
-    gap: 8px;
   }
 }

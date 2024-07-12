@@ -1,17 +1,17 @@
-<div class="w-full h-full grid gap-5">
-  <div class="general-info-card flex flex-column p-3 align-items-start col-5">
+<div class="weather-content w-full h-full grid">
+  <div class="weather-content__general align-items-start col-12 lg:col-4">
     <app-search-form (search)="handleSearch($event)"></app-search-form>
     @if(current() !== undefined) {
       <div class="flex flex-row w-full justify-content-between">
-        <div class="current-weather-info">
-          <div class="main-temperature">{{current()!.main!.temp}}℃</div>
-          <div class="main-description">{{current()!.weather[0]!.description}}℃</div>
-          <div class="extra-info">
-            <div class="extra-info-detail text-800">
+        <div class="weather-content__general__main">
+          <div class="temperature">{{current()!.main!.temp}}℃</div>
+          <div class="description">{{current()!.weather[0]!.description}}℃</div>
+          <div class="extra">
+            <div class="extra__detail text-800">
               <div>Wind speed</div>
               <div>{{current()!.wind.speed}}</div>
             </div>
-            <div class="extra-info-detail text-800">
+            <div class="extra__detail text-800">
               <div>Visibility</div>
               <div>{{current()!.visibility}}</div>
             </div>
@@ -21,8 +21,9 @@
       </div>
     }
   </div>
+
   @if((resultList | async)?.length !== 0) {
-    <div class="weather-forecast-list flex flex-row">
+    <div class="weather-content__forecast-list col-12 flex flex-row">
       @for(record of resultList | async; track $index) {
         <app-simple-forecast-card
           [date] = "record.date"
@@ -33,22 +34,6 @@
         >
         </app-simple-forecast-card>
       }
-    </div>
-    <div class="flex flex-column gap-3">
-      <div class="sun-info-card">
-        <span class="text-7xl icon-sunrise"></span>
-        <div class="flex flex-column">
-          <div>Sunrise</div>
-          <div class="text-3xl">{{getSunriseAndSunsetTime().sunriseAt}}</div>
-        </div>
-      </div>
-      <div class="sun-info-card">
-        <span class="text-7xl icon-sunset"></span>
-        <div class="flex flex-column">
-          <div>Sunset</div>
-          <div class="text-3xl">{{getSunriseAndSunsetTime().sunsetAt}}</div>
-        </div>
-      </div>
     </div>
   }
 </div>

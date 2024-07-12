@@ -7,7 +7,6 @@ import {WeatherForecastProcessorService} from "./core/service/weather-forecast-p
 import {TimeBasedWeatherForecast} from "./core/models/time-based-weather-forecast";
 import {AsyncPipe, DatePipe} from "@angular/common";
 import {BehaviorSubject, zip} from "rxjs";
-import {DateUtils} from "../shared/date-utils";
 import {CurrentWeatherData} from "./core/models/current-weather-data";
 import {WeatherForecastData} from "./core/models/weather-forecast-data";
 import {SimpleForecastCardComponent} from "./components/simple-forecast-card/simple-forecast-card.component";
@@ -22,15 +21,12 @@ import {SimpleForecastCardComponent} from "./components/simple-forecast-card/sim
 export class AppComponent implements OnInit {
   weatherForecastService = inject(WeatherForecastService);
   weatherForecastProcessorService = inject(WeatherForecastProcessorService);
-  dateUtils: DateUtils = inject(DateUtils);
-
-  overviewCityInfo = signal<{ sunrise: number; sunset: number } | undefined>(undefined);
   current = signal<CurrentWeatherData | undefined>(undefined);
   forecasts = signal<NormalizedWeatherForecast>({});
   resultList = new BehaviorSubject<Array<{ date: string; data: { [time: string]: TimeBasedWeatherForecast } }>>([]);
 
   handleSearch(locationName: string) {
-    this._fetchWeatherBySearchValue(locationName);  
+    this._fetchWeatherBySearchValue(locationName);
   }
 
   _fetchWeatherBySearchValue(value: string) {
@@ -42,7 +38,6 @@ export class AppComponent implements OnInit {
         q: value,
       })
     ).subscribe(value => {
-      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys);
       this.current.set(value[0] as CurrentWeatherData);
       this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
       this.generateDisplayedForecastList();
@@ -65,13 +60,6 @@ export class AppComponent implements OnInit {
     return Object.keys(forecast)[0];
   }
 
-  getSunriseAndSunsetTime() {
-    return {
-      sunriseAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunrise),
-      sunsetAt: this.dateUtils.convertToDateTime(this.overviewCityInfo()!.sunset)
-    }
-  }
-
   ngOnInit() {
     if(!!navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(result => {
@@ -91,7 +79,6 @@ export class AppComponent implements OnInit {
         lon
       )
     ).subscribe(value => {
-      this.overviewCityInfo.set((value[0] as CurrentWeatherData).sys)
       this.current.set(value[0] as CurrentWeatherData);
       this.forecasts.set(this.weatherForecastProcessorService.processData((value[1] as WeatherForecastData).list))
       this.generateDisplayedForecastList();
