@@ -4,7 +4,7 @@
     @if(current() !== undefined) {
       <div class="flex flex-row w-full justify-content-between">
         <div class="weather-content__general__main">
-          <div class="temperature">{{getWholeTemperature(current()!.main!.temp)}}°C</div>
+          <div class="temperature">{{current()!.main!.temp | number: '1.0-0'}}°C</div>
           <div class="description">{{current()!.weather[0]!.description}}</div>
           <div class="extra">
             <div class="extra__detail text-800">
@@ -26,11 +26,13 @@
     <div class="weather-content__forecast-list flex flex-row col-12">
       @for(record of resultList | async; track $index) {
         <app-simple-forecast-card
+          [index]="$index"
           [date] = "record.date"
           [iconName]="record.data[getFirstForecastIndex(record.data)].weather[0].icon"
           [highestTemperature]="getHighestAndLowestTemperature(record.data).highest"
           [lowestTemperature]="getHighestAndLowestTemperature(record.data).lowest"
           [iconAlt]="record.data[getFirstForecastIndex(record.data)].weather[0].description"
+          (clickEvent)="handleCardClick($event)"
         >
         </app-simple-forecast-card>
       }

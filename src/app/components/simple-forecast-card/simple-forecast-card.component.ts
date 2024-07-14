@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {DatePipe, NgOptimizedImage} from "@angular/common";
 
 @Component({
@@ -14,9 +14,14 @@ export class SimpleForecastCardComponent {
   iconName = input.required<string>();
   highestTemperature = input.required<number>();
   lowestTemperature = input.required<number>();
+  index = input.required<number>();
   iconAlt = input<string>("");
-
+  clickEvent = output<number>();
   generateDisplayedDayOfWeek() {
     return this.days[new Date(Date.parse(this.date())).getDay()]
+  }
+
+  handleClick() {
+    this.clickEvent.emit(this.index())
   }
 }

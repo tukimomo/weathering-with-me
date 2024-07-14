@@ -1,4 +1,4 @@
-<div class="simple-forecast-container">
+<div class="simple-forecast-container" (click)="handleClick()">
   <div class="simple-forecast-container__date-info flex flex-column align-items-center">
     <div class="simple-forecast-container__date-info__detail__date">{{ date() | date:"MMM, dd" }}</div>
     <div class="simple-forecast-container__date-info__detail__weekday">{{ generateDisplayedDayOfWeek() }}</div>
