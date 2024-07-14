@@ -1,14 +1,14 @@
 @import 'primeflex/primeflex.scss';
 @import './colors';
 
-@mixin responsive-mobile {
-  @media(max-width: $md) {
+@mixin responsive-tablet {
+  @media(min-width: $md) {
     @content
   }
 };
 
-@mixin responsive-tablet {
-  @media(min-width: $md) and (max-width: $lg) {
+@mixin responsive-desktop {
+  @media(min-width: 1920px) {
     @content
   }
 };

@@ -2,49 +2,40 @@
 @import "../../../mixins";
 
 .simple-forecast-container {
+  flex: 1;
   @extend %container-vertical;
-  width: 180px;
-  max-height: 280px;
   height: fit-content;
-}
-
-@include responsive-mobile() {
-  .simple-forecast-container {
-    width: fit-content;
-    height: fit-content;
-    padding: 8px;
-    gap: 4px;
-    border-radius: 8px;
-
-    &__date-info {
-      &__detail {
-        &__date {
-          display: none;
-        }
-
-        &__weekday {
-          font-size: 12px;
-        }
+  max-height: 280px;
+  padding: 8px;
+  border-radius: 8px;
+  gap: 16px;
+  &__date-info {
+    &__detail {
+      &__date {
+        display: none;
+        font-size: 24px;
+      }
+      &__weekday {
+        font-size: 12px;
       }
     }
-
-    &__weather {
-      align-items: center;
-
-      img {
-        width: 36px;
-        height: 36px;
-      }
-
-      &__temperature {
+  }
+  &__weather {
+    gap: 8px;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    &__temperature {
+      .temperature-info {
+        justify-content: center;
         align-items: center;
-
         .label {
-          display: none
+          display: none;
         }
-
         .value {
-          font-size: 12px
+          text-align: center;
+          font-size: 12px;
         }
       }
     }
@@ -53,44 +44,43 @@
 
 @include responsive-tablet() {
   .simple-forecast-container {
-    width: fit-content;
+    @extend %container-vertical;
+    height: fit-content;
     max-height: 280px;
-    padding: 16px;
-    gap: 4px;
-    border-radius: 8px;
-
-    .simple-forecast-container__date-info {
+    gap: 16px;
+    padding: 24px;
+    &__date-info {
       &__detail {
         &__date {
-          font-size: 12px
+          display: block;
+          font-size: 24px;
         }
-
         &__weekday {
-          font-size: 12px;
+          font-size: 16px;
         }
       }
     }
-
     &__weather {
+      gap: 8px;
       img {
-        width: 56px;
-        height: 56px;
+        width: 72px;
+        height: 72px;
       }
-
-      align-items: center;
-
       &__temperature {
-        align-items: center;
-
-        .label {
-          display: none
-        }
-
-        .value {
-          font-size: 16px
+        .temperature-info {
+          justify-content: space-between;
+          align-items: center;
+          .label {
+            display: block;
+            font-size: 14px;
+          }
+          .value {
+            text-align: right;
+            font-size: 14px;
+          }
         }
       }
     }
-
   }
+  
 }

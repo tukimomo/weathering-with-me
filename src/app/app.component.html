@@ -1,11 +1,11 @@
 <div class="weather-content w-full h-full flex flex-column">
-  <div class="weather-content__general align-items-start col-12 lg:col-4">
+  <div class="weather-content__general align-items-start col-12 xl:col-5">
     <app-search-form (search)="handleSearch($event)"></app-search-form>
     @if(current() !== undefined) {
       <div class="flex flex-row w-full justify-content-between">
         <div class="weather-content__general__main">
-          <div class="temperature">{{getWholeTemperature(current()!.main!.temp)}}℃</div>
-          <div class="description">{{current()!.weather[0]!.description}}℃</div>
+          <div class="temperature">{{getWholeTemperature(current()!.main!.temp)}}°C</div>
+          <div class="description">{{current()!.weather[0]!.description}}</div>
           <div class="extra">
             <div class="extra__detail text-800">
               <div>Wind speed</div>
@@ -23,7 +23,7 @@
   </div>
 
   @if((resultList | async)?.length !== 0) {
-    <div class="weather-content__forecast-list flex flex-row col-12 flex flex-row">
+    <div class="weather-content__forecast-list flex flex-row col-12">
       @for(record of resultList | async; track $index) {
         <app-simple-forecast-card
           [date] = "record.date"

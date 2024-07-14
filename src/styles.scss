@@ -19,18 +19,12 @@ html, body {
   margin-top: 24px;
   margin-left: unset;
   margin-right: unset;
-  padding-left: 72px;
-  padding-right: 72px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
-
-@include responsive-mobile() {
+@include responsive-desktop() {
   html, body {
-    padding: 4px;
-  }
-}
-
-@include responsive-tablet() {
-  html, body {
-    padding: 16px;
+    padding-left: 192px;
+    padding-right: 192px;
   }
 }

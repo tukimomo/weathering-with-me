@@ -5,19 +5,18 @@
   gap: 16px;
   &__general  {
     @extend %container-vertical;
-    padding: 32px;
-    min-width: 300px;
+    padding: 24px;
     height: fit-content;
     &__main {
       display: flex;
       flex-direction: column;
-      min-width: 150px;
+      gap: 16px;
       .temperature {
         font-size: 48px;
       }
 
       .description {
-        font-size: 24px;
+        font-size: 16px;
       }
 
       .extra {
@@ -33,40 +32,27 @@
   }
 
   &__forecast-list {
-    gap: 24px;
+    justify-content: space-between;
+    padding: unset;
+    margin: unset;
   }
 }
 
-@include responsive_mobile() {
+@include responsive_tablet() {
   .weather-content {
     &__general  {
-      @extend %container-vertical;
-      min-width: 280px;
       &__main {
-        display: flex;
-        flex-direction: column;
-        min-width: 200px;
-        .temperature {
-          font-size: 48px;
-        }
-
         .description {
-          font-size: 16px;
-        }
-
-        .extra {
-          &-detail {
-              font-size: 12px;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-            }
+          font-size: 24px;
         }
       }
     }
 
     &__forecast-list {
-      gap: 8px;
+      gap: 24px;
+      app-simple-forecast-card {
+        flex: 1
+      }
     }
   }
 }

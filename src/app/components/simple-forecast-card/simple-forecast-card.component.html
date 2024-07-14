@@ -3,16 +3,16 @@
     <div class="simple-forecast-container__date-info__detail__date">{{ date() | date:"MMM, dd" }}</div>
     <div class="simple-forecast-container__date-info__detail__weekday">{{ generateDisplayedDayOfWeek() }}</div>
   </div>
-  <div class="simple-forecast-container__weather flex-column w-full flex gap-3 align-items-center">
-    <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="56" height="56" priority="true" [alt]="iconAlt()">
-    <div class="simple-forecast-container__weather__temperature w-full flex flex-column gap-1">
-      <div class="flex flex-row justify-content-between">
+  <div class="simple-forecast-container__weather flex-column w-full flex align-items-center">
+    <img ngSrc="assets/illustrations/weather/{{iconName()}}.svg" width="54" height="54" priority="true" [alt]="iconAlt()">
+    <div class="simple-forecast-container__weather__temperature w-full flex flex-column">
+      <div class="temperature-info flex flex-row">
         <div class="label">Highest:</div>
-        <div class="value">{{ highestTemperature() }}℃</div>
+        <div class="value">{{ highestTemperature() }}°C</div>
       </div>
-      <div class="flex flex-row justify-content-between">
+      <div class="temperature-info flex flex-row">
         <div class="label">Lowest:</div>
-        <div class="value">{{ lowestTemperature() }}℃</div>
+        <div class="value">{{ lowestTemperature() }}°C</div>
       </div>
     </div>
   </div>
