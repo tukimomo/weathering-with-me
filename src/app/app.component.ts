@@ -11,6 +11,7 @@ import {CurrentWeatherData} from "./core/models/current-weather-data";
 import {WeatherForecastData} from "./core/models/weather-forecast-data";
 import {SimpleForecastCardComponent} from "./components/simple-forecast-card/simple-forecast-card.component";
 import { ChartComponent } from "./components/chart/chart.component";
+import {DateUtils} from "../shared/date-utils";
 
 @Component({
   selector: 'app-root',
@@ -92,4 +93,6 @@ export class AppComponent implements OnInit {
   getFirstForecastIndex(forecast: { [time: string]: TimeBasedWeatherForecast }) {
     return Object.keys(forecast)[0];
   }
+
+  protected readonly DateUtils = DateUtils;
 }

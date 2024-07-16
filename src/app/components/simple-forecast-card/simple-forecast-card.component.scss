@@ -6,7 +6,7 @@
   @extend %container-vertical;
   height: fit-content;
   max-height: 280px;
-  padding: 8px;
+  padding: 8px!important;
   border-radius: 8px;
   gap: 16px;
   &__date-info {
@@ -48,7 +48,7 @@
     height: fit-content;
     max-height: 280px;
     gap: 16px;
-    padding: 24px;
+    padding: 24px!important;
     &__date-info {
       &__detail {
         &__date {
@@ -82,5 +82,5 @@
       }
     }
   }
-  
+
 }

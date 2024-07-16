@@ -1,4 +1,4 @@
-<div class="weather-content w-full h-full flex flex-column">
+<div class="weather-content w-full grid grid-nogutter">
   <div class="weather-content__general align-items-start col-12 xl:col-5">
     <app-search-form (search)="handleSearch($event)"></app-search-form>
     @if(current() !== undefined) {
@@ -21,6 +21,25 @@
       </div>
     }
   </div>
+
+  @if(!!current()) {
+    <div class="weather-content__sun-info xl:col-2">
+      <div class="weather-content__sun-info__sun-detail sm:col-12 flex flex-row align-items-center flex-grow-1">
+        <div class="flex flex-column label align-items-center">
+          <div class="icon-sunrise text-7xl"></div>
+          Sun rise
+        </div>
+        <div class="text-2xl">{{ DateUtils.convertToDateTime(current()!.sys.sunrise) }}</div>
+      </div>
+      <div class="weather-content__sun-info__sun-detail sm:col-12 flex flex-row align-items-center flex-grow-1">
+        <div class="flex flex-column label align-items-center">
+          <div class="icon-sunset text-7xl"></div>
+          Sunset
+        </div>
+        <div class="text-2xl">{{ DateUtils.convertToDateTime(current()!.sys.sunset) }}</div>
+      </div>
+    </div>
+  }
 
   @if((resultList | async)?.length !== 0) {
     <div class="weather-content__forecast-list flex flex-row col-12">
